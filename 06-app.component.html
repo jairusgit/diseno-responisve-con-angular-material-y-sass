@@ -1,0 +1,44 @@
+<main>
+  <header>
+    <mat-toolbar [class.is-mobile]="mobileQuery.matches">
+    <div>
+      <button mat-icon-button (click)="snav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <a href="/">
+        <img src="/assets/img/logo-light.svg" alt="Logo" class="logo-light">
+        <img src="/assets/img/logo-dark.svg" alt="Logo" class="logo-dark">
+      </a>
+    </div>
+    <nav *ngIf="!mobileQuery.matches">
+      <ul>
+        <li><a mat-button href="/">Home</a></li>
+        <li><a mat-button href="/contacto">Contacto</a></li>
+        <li><a mat-button href="/informacion">Información</a></li>
+      </ul>
+    </nav>
+  </mat-toolbar>
+  </header>
+  <mat-sidenav-container [class.is-mobile]="mobileQuery.matches">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <ul>
+        <li><a mat-button href="/"><mat-icon>home</mat-icon>Home</a></li>
+        <li><a mat-button href="/contacto"><mat-icon>alternate_email</mat-icon>Contacto</a></li>
+        <li><a mat-button href="/informacion"><mat-icon>info</mat-icon>Información</a></li>
+      </ul>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <section>
+        <router-outlet />
+      </section>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  <footer>
+    <p>&copy; 2024. Desarrollado por 
+      <a href="https://jairogarciarincon.com" target="_blank">
+        jairogarciarincon.com
+      </a>
+    </p>
+  </footer>
+</main>
