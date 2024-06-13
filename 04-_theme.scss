@@ -1,7 +1,7 @@
 @use '@angular/material' as mat;
 @include mat.core();
 
-/* Definimos un nuevo mapa de clores */
+/* Definimos un nuevo mapa de colores */
 $colores: (
   50: #FAFAFA,
   100: #F5F5F5,
@@ -32,34 +32,34 @@ $colores: (
  * y 2 para modo oscuro (primary y accent).
  * Las paletas primary parten de la definida arriba ($colores),
  * y las accent parten de una ya definida en Angular (mat.$light-blue-palette).
- * los 4 números corresponden a los calores default, lighter, darker y text .
+ * los 4 números corresponden a los colores default, lighter, darker y text .
  */
 
-$p-primary-light: mat.define-palette($colores, 800, 50, 900, 900);
-$p-accent-light: mat.define-palette(mat.$green-palette, 100, 900, 50, 50);
-$p-primary-dark: mat.define-palette($colores, 100, 900, 50, 50);
-$p-accent-dark: mat.define-palette(mat.$teal-palette, 700, 50, 800, 900);
+ $p-primary-light: mat.m2-define-palette($colores, 800, 50, 900, 900);
+ $p-accent-light: mat.m2-define-palette(mat.$m2-green-palette, 100, 900, 50, 50);
+ $p-primary-dark: mat.m2-define-palette($colores, 100, 900, 50, 50);
+ $p-accent-dark: mat.m2-define-palette(mat.$m2-teal-palette, 700, 50, 800, 900);
 
-/*
+ /*
  * Defino los temas claro y oscuro a partir de las paletas, 
  * dejando el resto de opciones por defecto 
  */
 
- $t-light: mat.define-light-theme((
+ $t-light: mat.m2-define-light-theme((
   color: (
     primary: $p-primary-light,
     accent: $p-accent-light,
   ),
-  typography: mat.define-typography-config(),
+  typography: mat.m2-define-typography-config(),
   density: 0,
 ));
 
-$t-dark: mat.define-dark-theme((
+$t-dark: mat.m2-define-dark-theme((
   color: (
     primary: $p-primary-dark,
     accent: $p-accent-dark,
   ),
-  typography: mat.define-typography-config(),
+  typography: mat.m2-define-typography-config(),
   density: 0,
 ));
 
@@ -77,33 +77,34 @@ $t-dark: mat.define-dark-theme((
 
 //Mixin para obtener el color de texto en función del modo (claro u oscuro)
 @mixin get-color($palette,$hue){
-  color: mat.get-theme-color($t-dark, $palette, $hue);
-  @media (prefers-color-scheme: light) {
-    color: mat.get-theme-color($t-light, $palette, $hue);
+    color: mat.get-theme-color($t-dark, $palette, $hue);
+    @media (prefers-color-scheme: light) {
+      color: mat.get-theme-color($t-light, $palette, $hue);
+    }
   }
-}
-
-//Mixin para obtener el color de fondo en función del modo (claro u oscuro)
-@mixin get-bg-color($palette,$hue){
-  background-color: mat.get-theme-color($t-dark, $palette, $hue);
-  @media (prefers-color-scheme: light) {
-    background-color: mat.get-theme-color($t-light, $palette, $hue);
+  
+  //Mixin para obtener el color de fondo en función del modo (claro u oscuro)
+  @mixin get-bg-color($palette,$hue){
+    background-color: mat.get-theme-color($t-dark, $palette, $hue);
+    @media (prefers-color-scheme: light) {
+      background-color: mat.get-theme-color($t-light, $palette, $hue);
+    }
   }
-}
 
-//Mixin para preformatear los enlaces
+  //Mixin para preformatear los enlaces
 @mixin a-no-underline-hover-bold() {
-  a {
-      font-weight: normal;
-      text-decoration: none;
-      color: unset;
-
-      &:hover {
-          font-weight: bold;
-      }
-
-      &:visited {
-          color: unset;
-      }
+    a {
+        font-weight: normal;
+        text-decoration: none;
+        color: unset;
+  
+        &:hover {
+            font-weight: bold;
+        }
+  
+        &:visited {
+            color: unset;
+        }
+    }
   }
-}
+  
